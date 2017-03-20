@@ -1,4 +1,4 @@
-
+import random
 
 def drawHead(state):
     if(state == 0):
@@ -76,7 +76,9 @@ def drawLegs(state):
         print("    |")
         print("____|____")
 
-        
-drawHead(1)
-drawBodyAndArms(3)
-drawLegs(2)
+
+def main():
+    drawHead(1)
+
+if __name__ == "__main__":
+    main()
