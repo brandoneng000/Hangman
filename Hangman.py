@@ -1,7 +1,8 @@
 import random
 
+
 def drawHead(state):
-    if(state == 0):
+    if (state == 0):
         print("    _________")
         print("    |       |")
         print("    |       |")
@@ -20,35 +21,37 @@ def drawHead(state):
         print("    |     \___/")
         print("    |       |  ")
 
+
 def drawBodyAndArms(state):
-    if(state == 0):
+    if (state == 0):
         print("    |     ")
         print("    |     ")
         print("    |     ")
         print("    |     ")
         print("    |     ")
         print("    |     ")
-    elif(state == 1):
+    elif (state == 1):
         print("    |       |  ")
         print("    |       |")
         print("    |       |")
         print("    |       |")
         print("    |       |")
         print("    |       |")
-    elif(state == 2):
+    elif (state == 2):
         print("    |       | ")
         print("    |      /| ")
         print("    |     / | ")
         print("    |    /  | ")
         print("    |       |")
         print("    |       |")
-    elif(state == 3):
+    elif (state == 3):
         print("    |       |  ")
         print("    |      /|\\")
         print("    |     / | \\")
         print("    |    /  |  \\")
         print("    |       |")
         print("    |       |")
+
 
 def drawLegs(state):
     if (state == 0):
@@ -78,7 +81,14 @@ def drawLegs(state):
 
 
 def main():
-    drawHead(1)
+    file = open("Dictionary.txt", "r+")
+    lines = file.readlines()
+    word = random.choice(lines)[:-1]
+    string = ''.join(word)
+    print(word)
+    print(string)
+    print("Word is %s and is %d letters long" %(string, len(string)))
+
 
 if __name__ == "__main__":
     main()
