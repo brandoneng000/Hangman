@@ -83,12 +83,18 @@ def drawLegs(state):
 def main():
     file = open("Dictionary.txt", "r+")
     lines = file.readlines()
-    word = random.choice(lines)[:-1]
-    #string = ''.join(word)
+    #word = random.choice(lines)[:-1]
+    word = lines[960][:-1]
+    mystery = word
     print(word)
-    #print(string)
     print("Word is %s and is %d letters long" %(word, len(word)))
 
+    for letter in range( 0, len(mystery)):
+        if mystery[letter].isalpha():
+            mystery = mystery[:letter] + "_" + mystery[letter + 1:]
+        letter += 1
+
+    print(mystery)
 
 if __name__ == "__main__":
     main()
