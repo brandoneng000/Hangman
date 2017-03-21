@@ -84,10 +84,10 @@ def main():
     file = open("Dictionary.txt", "r+")
     lines = file.readlines()
     word = random.choice(lines)[:-1]
-    string = ''.join(word)
+    #string = ''.join(word)
     print(word)
-    print(string)
-    print("Word is %s and is %d letters long" %(string, len(string)))
+    #print(string)
+    print("Word is %s and is %d letters long" %(word, len(word)))
 
 
 if __name__ == "__main__":
