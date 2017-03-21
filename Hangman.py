@@ -1,7 +1,7 @@
 import random
 
 
-def drawHead(state):
+def draw_head(state):
     if (state == 0):
         print("    _________")
         print("    |       |")
@@ -22,7 +22,7 @@ def drawHead(state):
         print("    |       |  ")
 
 
-def drawBodyAndArms(state):
+def draw_body_and_arms(state):
     if (state == 0):
         print("    |     ")
         print("    |     ")
@@ -53,7 +53,7 @@ def drawBodyAndArms(state):
         print("    |       |")
 
 
-def drawLegs(state):
+def draw_legs(state):
     if (state == 0):
         print("    |   ")
         print("    |   ")
@@ -79,6 +79,13 @@ def drawLegs(state):
         print("    |")
         print("____|____")
 
+def hide_words(mystery):
+    for letter in range( 0, len(mystery)):
+        if mystery[letter].isalpha():
+            mystery = mystery[:letter] + "_" + mystery[letter + 1:]
+        letter += 1
+
+    return mystery
 
 def main():
     file = open("Dictionary.txt", "r+")
@@ -89,10 +96,7 @@ def main():
     print(word)
     print("Word is %s and is %d letters long" %(word, len(word)))
 
-    for letter in range( 0, len(mystery)):
-        if mystery[letter].isalpha():
-            mystery = mystery[:letter] + "_" + mystery[letter + 1:]
-        letter += 1
+    mystery = hide_words(mystery)
 
     print(mystery)
 
