@@ -4,6 +4,7 @@ attempts = 0
 word = ""
 mystery = ""
 file = open("Dictionary.txt", "r+")
+lines = [None]
 
 
 def draw_head(state):
@@ -148,18 +149,18 @@ def get_guess():
 
 def initialize_dictionary():
     global file
+    global lines
     lines = file.readlines()
 
-    return lines
 
-
-def initialize_game(lines):
+def initialize_game():
     global mystery
     global word
     global attempts
+    global lines
     user_input = ""
-
     attempts = 0
+
     while user_input != "yes" and user_input != "no":
         user_input = input("Would you like to enter a word or phrase? \"yes\" or \"no\". ")
 
@@ -167,14 +168,15 @@ def initialize_game(lines):
         word = random.choice(lines)[:-1].lower()
     else:
         word = input("Enter word or phrase (do not include '_'): ")
+
     mystery = hide_words(word)
-    print("Guess what the word is?")
-    print(mystery)
+    print("Guess what the word is?", mystery)
 
 
 def run_game():
     global mystery
     global word
+    global lines
     lose = draw_hangman()
 
     while mystery != word and lose == 1:
@@ -192,17 +194,12 @@ def run_game():
 def main():
     global mystery
     global word
-    replay = ""
+    global lines
+    replay = "yes"
 
-    lines = initialize_dictionary()
-    initialize_game(lines)
-    run_game()
-
-    while replay != "yes" and replay != "no":
-        replay = input("Would you like to play again? Please answer with \"yes\" or \"no\".")
-
+    initialize_dictionary()
     while replay == "yes":
-        initialize_game(lines)
+        initialize_game()
         run_game()
         replay = ""
         while replay != "yes" and replay != "no":
