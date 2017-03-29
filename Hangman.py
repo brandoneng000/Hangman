@@ -3,6 +3,7 @@ import random
 attempts = 0
 word = ""
 mystery = ""
+file = open("Dictionary.txt", "r+")
 
 
 def draw_head(state):
@@ -144,8 +145,9 @@ def get_guess():
 
     return guess.lower()
 
+
 def initialize_dictionary():
-    file = open("Dictionary.txt", "r+")
+    global file
     lines = file.readlines()
 
     return lines
@@ -155,9 +157,16 @@ def initialize_game(lines):
     global mystery
     global word
     global attempts
+    user_input = ""
 
     attempts = 0
-    word = random.choice(lines)[:-1].lower()
+    while user_input != "yes" and user_input != "no":
+        user_input = input("Would you like to enter a word or phrase? \"yes\" or \"no\". ")
+
+    if user_input == "no":
+        word = random.choice(lines)[:-1].lower()
+    else:
+        word = input("Enter word or phrase (do not include '_'): ")
     mystery = hide_words(word)
     print("Guess what the word is?")
     print(mystery)
