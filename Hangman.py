@@ -1,8 +1,6 @@
 import random
-import sys
 
 attempts = 0
-file = open("Dictionary.txt", "r+")
 word = ""
 mystery = ""
 
@@ -146,25 +144,30 @@ def get_guess():
 
     return guess.lower()
 
+def initialize_dictionary():
+    file = open("Dictionary.txt", "r+")
+    lines = file.readlines()
 
-def initialize_game():
+    return lines
+
+
+def initialize_game(lines):
     global mystery
     global word
+    global attempts
 
-    lines = file.readlines()
+    attempts = 0
     word = random.choice(lines)[:-1].lower()
-    word = lines[0][:-1].lower()
     mystery = hide_words(word)
     print("Guess what the word is?")
     print(mystery)
 
 
-def main():
+def run_game():
     global mystery
     global word
     lose = draw_hangman()
 
-    initialize_game()
     while mystery != word and lose == 1:
         guess = get_guess()
         mystery = letter_check(mystery, word, guess)
@@ -176,6 +179,25 @@ def main():
     elif lose == 0:
         print("You Lose!!! The word was", word)
 
+
+def main():
+    global mystery
+    global word
+    replay = ""
+
+    lines = initialize_dictionary()
+    initialize_game(lines)
+    run_game()
+
+    while replay != "yes" and replay != "no":
+        replay = input("Would you like to play again? Please answer with \"yes\" or \"no\".")
+
+    while replay == "yes":
+        initialize_game(lines)
+        run_game()
+        replay = ""
+        while replay != "yes" and replay != "no":
+            replay = input("Would you like to play again? Please answer with \"yes\" or \"no\".")
 
 if __name__ == "__main__":
     main()
